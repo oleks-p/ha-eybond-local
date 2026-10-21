@@ -1,0 +1,244 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Колектор EyeBond",
+        "description": "Home Assistant попросить колектор під'єднуватися до нього замість хмари виробника, а потім читатиме інвертор. В інвертор нічого не записується. Закріпіть адресу колектора в DHCP: оголошення надсилаються на цю адресу.",
+        "data": {
+          "collector_ip": "Адреса колектора",
+          "advertise_ip": "Адреса Home Assistant у мережі колектора",
+          "port": "Порт, до якого під'єднується колектор",
+          "prefix": "Префікс ідентифікаторів"
+        }
+      }
+    },
+    "error": {
+      "port_in_use": "Цей порт уже слухає щось інше - часто інша інтеграція, що обслуговує той самий колектор на 8899. Спершу вимкніть її: колектор може обслуговувати лише одна інтеграція.",
+      "no_collector": "Колектор не під'єднався за 30 секунд. Перевірте його адресу, що він відповідає на ping і що адреса Home Assistant для нього досяжна.",
+      "no_inverter": "Колектор під'єднався, але інвертор за ним не відповів.",
+      "unsupported_protocol": "Інвертор повідомляє номер протоколу SMG-II, на якому цю інтеграцію не перевіряли. Надійно розшифрувати дані неможливо.",
+      "already_configured": "Цю адресу колектора вже налаштовано.",
+      "prefix_in_use": "Цей префікс уже використовує інший колектор. З нього будуються ідентифікатори, тож кожному апарату потрібен свій - для трифазної системи, наприклад, inverter_l1, inverter_l2, inverter_l3.",
+      "invalid_prefix": "Малі латинські літери, цифри й підкреслення, першою - літера."
+    },
+    "abort": {
+      "already_configured": "Цей колектор уже налаштовано."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "operating_mode": {
+        "name": "Режим роботи",
+        "state": {
+          "power_on": "Увімкнення",
+          "standby": "Очікування",
+          "grid": "Від мережі",
+          "off_grid": "Автономний",
+          "bypass": "Байпас",
+          "charging": "Заряд",
+          "fault": "Аварія"
+        }
+      },
+      "grid_voltage": {
+        "name": "Напруга мережі"
+      },
+      "grid_frequency": {
+        "name": "Частота мережі"
+      },
+      "grid_power": {
+        "name": "Потужність мережі"
+      },
+      "bridge_voltage": {
+        "name": "Міст: напруга"
+      },
+      "bridge_current": {
+        "name": "Міст: струм"
+      },
+      "bridge_frequency": {
+        "name": "Міст: частота"
+      },
+      "bridge_power": {
+        "name": "Міст: потужність"
+      },
+      "ac_charging_power": {
+        "name": "Потужність заряду від мережі"
+      },
+      "output_voltage": {
+        "name": "Вихідна напруга"
+      },
+      "output_current": {
+        "name": "Вихідний струм"
+      },
+      "output_frequency": {
+        "name": "Вихідна частота"
+      },
+      "output_power": {
+        "name": "Вихідна потужність"
+      },
+      "output_apparent_power": {
+        "name": "Повна вихідна потужність"
+      },
+      "battery_voltage": {
+        "name": "Напруга батареї"
+      },
+      "battery_current": {
+        "name": "Струм батареї"
+      },
+      "battery_power": {
+        "name": "Потужність батареї"
+      },
+      "pv_voltage": {
+        "name": "Напруга PV"
+      },
+      "pv_current": {
+        "name": "Струм PV"
+      },
+      "pv_power": {
+        "name": "Потужність PV"
+      },
+      "pv_charging_power": {
+        "name": "Потужність заряду від PV"
+      },
+      "load_percentage": {
+        "name": "Навантаження"
+      },
+      "dc_temperature": {
+        "name": "DC-модуль: температура"
+      },
+      "bridge_temperature": {
+        "name": "Міст: температура"
+      },
+      "battery_soc": {
+        "name": "Рівень заряду батареї"
+      },
+      "battery_average_current": {
+        "name": "Середній струм батареї"
+      },
+      "ac_charging_current": {
+        "name": "Струм заряду від мережі"
+      },
+      "pv_charging_current": {
+        "name": "Струм заряду від PV"
+      },
+      "fault_code": {
+        "name": "Код аварії"
+      },
+      "warning_code": {
+        "name": "Код попередження"
+      },
+      "bms_charge_voltage_limit": {
+        "name": "BMS: межа напруги заряду"
+      },
+      "bms_discharge_voltage_limit": {
+        "name": "BMS: межа напруги розряду"
+      },
+      "bms_charge_current_limit": {
+        "name": "BMS: межа струму заряду"
+      },
+      "bms_discharge_current_limit": {
+        "name": "BMS: межа струму розряду"
+      },
+      "bms_voltage": {
+        "name": "BMS: напруга"
+      },
+      "bms_soc": {
+        "name": "BMS: рівень заряду"
+      },
+      "output_mode": {
+        "name": "Режим виходу"
+      },
+      "output_priority": {
+        "name": "Пріоритет живлення"
+      },
+      "input_voltage_range": {
+        "name": "Діапазон вхідної напруги"
+      },
+      "buzzer_mode": {
+        "name": "Режим зумера"
+      },
+      "output_voltage_setting": {
+        "name": "Задана вихідна напруга"
+      },
+      "output_frequency_setting": {
+        "name": "Задана вихідна частота"
+      },
+      "battery_type": {
+        "name": "Тип батареї"
+      },
+      "battery_overvoltage": {
+        "name": "Перенапруга батареї"
+      },
+      "bulk_charge_voltage": {
+        "name": "Напруга заряду (bulk)"
+      },
+      "float_charge_voltage": {
+        "name": "Напруга підтримки (float)"
+      },
+      "low_voltage_cutoff_grid": {
+        "name": "Відсічка за напругою, з мережею"
+      },
+      "low_voltage_cutoff_off_grid": {
+        "name": "Відсічка за напругою, без мережі"
+      },
+      "max_charge_current": {
+        "name": "Максимальний струм заряду"
+      },
+      "max_mains_charge_current": {
+        "name": "Максимальний струм заряду від мережі"
+      },
+      "equalization_voltage": {
+        "name": "Напруга вирівнювання"
+      },
+      "soc_back_to_grid": {
+        "name": "SOC переходу на мережу"
+      },
+      "soc_back_to_battery": {
+        "name": "SOC переходу на батарею"
+      },
+      "soc_low_cutoff": {
+        "name": "SOC відсічки"
+      },
+      "rated_power": {
+        "name": "Номінальна потужність"
+      },
+      "battery_charge_power": {
+        "name": "Батарея — заряд"
+      },
+      "battery_discharge_power": {
+        "name": "Батарея — розряд"
+      },
+      "grid_import_power": {
+        "name": "Мережа — імпорт"
+      },
+      "battery_charge_energy": {
+        "name": "Батарея — заряджено"
+      },
+      "battery_discharge_energy": {
+        "name": "Батарея — віддано"
+      },
+      "grid_import_energy": {
+        "name": "Мережа — імпортовано"
+      },
+      "solar_energy": {
+        "name": "Сонце — вироблено"
+      },
+      "output_energy": {
+        "name": "Інвертор — вихід на будинок"
+      }
+    },
+    "binary_sensor": {
+      "collector_connected": {
+        "name": "Колектор на зв'язку"
+      },
+      "grid_available": {
+        "name": "Мережа"
+      },
+      "fault": {
+        "name": "Аварія"
+      },
+      "warning": {
+        "name": "Попередження"
+      }
+    }
+  }
+}

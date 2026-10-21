@@ -1,0 +1,244 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "EyeBond collector",
+        "description": "Home Assistant will ask the collector to connect to it instead of its vendor cloud, then read the inverter behind it. Nothing is written to the inverter. Give the collector a DHCP reservation: announces go to this address.",
+        "data": {
+          "collector_ip": "Collector address",
+          "advertise_ip": "Home Assistant's address on the collector's network",
+          "port": "Port the collector connects to",
+          "prefix": "Entity id prefix"
+        }
+      }
+    },
+    "error": {
+      "port_in_use": "Something else is listening on this port - often another integration serving the same collector on 8899. Disable it first: only one integration can serve a collector.",
+      "no_collector": "The collector did not connect within 30 seconds. Check its address, that it answers a ping, and that Home Assistant's address is reachable from it.",
+      "no_inverter": "The collector connected, but the inverter behind it did not answer.",
+      "unsupported_protocol": "The inverter reports an SMG-II protocol number this integration has not been measured on. Nothing would be decoded reliably.",
+      "already_configured": "This collector address is already configured.",
+      "prefix_in_use": "Another collector already uses this prefix. Entity ids are built from it, so each unit needs its own - for a three-phase bank, say inverter_l1, inverter_l2, inverter_l3.",
+      "invalid_prefix": "Lower-case letters, digits and underscores, starting with a letter."
+    },
+    "abort": {
+      "already_configured": "This collector is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "operating_mode": {
+        "name": "Operating mode",
+        "state": {
+          "power_on": "Power on",
+          "standby": "Standby",
+          "grid": "Grid",
+          "off_grid": "Off grid",
+          "bypass": "Bypass",
+          "charging": "Charging",
+          "fault": "Fault"
+        }
+      },
+      "grid_voltage": {
+        "name": "Grid voltage"
+      },
+      "grid_frequency": {
+        "name": "Grid frequency"
+      },
+      "grid_power": {
+        "name": "Grid power"
+      },
+      "bridge_voltage": {
+        "name": "Bridge voltage"
+      },
+      "bridge_current": {
+        "name": "Bridge current"
+      },
+      "bridge_frequency": {
+        "name": "Bridge frequency"
+      },
+      "bridge_power": {
+        "name": "Bridge power"
+      },
+      "ac_charging_power": {
+        "name": "Grid charging power"
+      },
+      "output_voltage": {
+        "name": "Output voltage"
+      },
+      "output_current": {
+        "name": "Output current"
+      },
+      "output_frequency": {
+        "name": "Output frequency"
+      },
+      "output_power": {
+        "name": "Output power"
+      },
+      "output_apparent_power": {
+        "name": "Output apparent power"
+      },
+      "battery_voltage": {
+        "name": "Battery voltage"
+      },
+      "battery_current": {
+        "name": "Battery current"
+      },
+      "battery_power": {
+        "name": "Battery power"
+      },
+      "pv_voltage": {
+        "name": "PV voltage"
+      },
+      "pv_current": {
+        "name": "PV current"
+      },
+      "pv_power": {
+        "name": "PV power"
+      },
+      "pv_charging_power": {
+        "name": "PV charging power"
+      },
+      "load_percentage": {
+        "name": "Load"
+      },
+      "dc_temperature": {
+        "name": "DC stage temperature"
+      },
+      "bridge_temperature": {
+        "name": "Bridge temperature"
+      },
+      "battery_soc": {
+        "name": "Battery state of charge"
+      },
+      "battery_average_current": {
+        "name": "Battery average current"
+      },
+      "ac_charging_current": {
+        "name": "Grid charging current"
+      },
+      "pv_charging_current": {
+        "name": "PV charging current"
+      },
+      "fault_code": {
+        "name": "Fault code"
+      },
+      "warning_code": {
+        "name": "Warning code"
+      },
+      "bms_charge_voltage_limit": {
+        "name": "BMS charge voltage limit"
+      },
+      "bms_discharge_voltage_limit": {
+        "name": "BMS discharge voltage limit"
+      },
+      "bms_charge_current_limit": {
+        "name": "BMS charge current limit"
+      },
+      "bms_discharge_current_limit": {
+        "name": "BMS discharge current limit"
+      },
+      "bms_voltage": {
+        "name": "BMS voltage"
+      },
+      "bms_soc": {
+        "name": "BMS state of charge"
+      },
+      "output_mode": {
+        "name": "Output mode"
+      },
+      "output_priority": {
+        "name": "Output priority"
+      },
+      "input_voltage_range": {
+        "name": "Input voltage range"
+      },
+      "buzzer_mode": {
+        "name": "Buzzer mode"
+      },
+      "output_voltage_setting": {
+        "name": "Output voltage setting"
+      },
+      "output_frequency_setting": {
+        "name": "Output frequency setting"
+      },
+      "battery_type": {
+        "name": "Battery type"
+      },
+      "battery_overvoltage": {
+        "name": "Battery over-voltage"
+      },
+      "bulk_charge_voltage": {
+        "name": "Bulk charge voltage"
+      },
+      "float_charge_voltage": {
+        "name": "Float charge voltage"
+      },
+      "low_voltage_cutoff_grid": {
+        "name": "Low-voltage cutoff, on grid"
+      },
+      "low_voltage_cutoff_off_grid": {
+        "name": "Low-voltage cutoff, off grid"
+      },
+      "max_charge_current": {
+        "name": "Maximum charge current"
+      },
+      "max_mains_charge_current": {
+        "name": "Maximum grid charge current"
+      },
+      "equalization_voltage": {
+        "name": "Equalisation voltage"
+      },
+      "soc_back_to_grid": {
+        "name": "SOC to switch to grid"
+      },
+      "soc_back_to_battery": {
+        "name": "SOC to switch to battery"
+      },
+      "soc_low_cutoff": {
+        "name": "Low SOC cutoff"
+      },
+      "rated_power": {
+        "name": "Rated power"
+      },
+      "battery_charge_power": {
+        "name": "Battery charging"
+      },
+      "battery_discharge_power": {
+        "name": "Battery discharging"
+      },
+      "grid_import_power": {
+        "name": "Grid import"
+      },
+      "battery_charge_energy": {
+        "name": "Battery charged"
+      },
+      "battery_discharge_energy": {
+        "name": "Battery discharged"
+      },
+      "grid_import_energy": {
+        "name": "Grid imported"
+      },
+      "solar_energy": {
+        "name": "Solar produced"
+      },
+      "output_energy": {
+        "name": "Output to the house"
+      }
+    },
+    "binary_sensor": {
+      "collector_connected": {
+        "name": "Collector connected"
+      },
+      "grid_available": {
+        "name": "Grid"
+      },
+      "fault": {
+        "name": "Fault"
+      },
+      "warning": {
+        "name": "Warning"
+      }
+    }
+  }
+}

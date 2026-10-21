@@ -1,0 +1,25 @@
+# Lint settings for the integration and its tests.
+#
+# The rule set is deliberately narrow: correctness (F, B), import hygiene (I),
+# modern syntax (UP) and the simplifications that genuinely read better (SIM).
+# Style beyond that is left alone -- this project's conventions live in its
+# comments, not in a formatter's opinion.
+target-version = "py313"
+line-length = 100
+
+[lint]
+select = ["F", "I", "UP", "B", "SIM", "ARG"]
+
+ignore = [
+  # Home Assistant fixes the signature of almost everything an integration
+  # implements -- async_setup_entry(hass, entry, add_entities), turn_on(**kwargs),
+  # a timer callback's `now` -- and not every argument is needed by every
+  # implementation.
+  "ARG001",
+  "ARG002",
+]
+
+[lint.per-file-ignores]
+# Tests name fixtures after what they build and request some only for their
+# side effects.
+"tests/*" = ["ARG001"]

@@ -1,0 +1,45 @@
+# A pushed tag becomes a published release here, because HACS offers the newest
+# RELEASE and ignores tags. A tag on its own leaves every instance still being
+# offered the previous version - or the default branch, if the repository has
+# never published one - with nothing anywhere reporting that anything is wrong.
+#
+# Both triggers run the same version check first, so a release published by
+# hand in the web UI is gated exactly as a tag push is.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Check the release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the manifest version matches the tag
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          manifest=$(python3 -c "import json;print(json.load(open('custom_components/eybond_local/manifest.json'))['version'])")
+          if [ "$tag" != "$manifest" ]; then
+            echo "tag $tag does not match manifest version $manifest" >&2
+            exit 1
+          fi
+      # Only on a tag push: a release that already exists is what the other
+      # trigger is for, and `gh release create` would fail on it. `--verify-tag`
+      # refuses to invent a tag that is not actually there.
+      - name: Publish the release
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes \
+            --verify-tag
